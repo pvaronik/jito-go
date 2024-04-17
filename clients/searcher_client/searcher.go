@@ -5,6 +5,8 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
+	"github.com/blocto/solana-go-sdk/types"
+	"github.com/mr-tron/base58"
 	"math/big"
 	"math/rand"
 	"time"
@@ -12,8 +14,8 @@ import (
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/programs/system"
 	"github.com/gagliardetto/solana-go/rpc"
-	"github.com/weeaa/jito-go/pkg"
-	"github.com/weeaa/jito-go/proto"
+	"github.com/pvaronik/jito-go/pkg"
+	"github.com/pvaronik/jito-go/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -236,7 +238,7 @@ func (c *Client) NewBundleSubscriptionResults(opts ...grpc.CallOption) (proto.Se
 }
 
 // BroadcastBundle sends a bundle of transactions on chain thru Jito.
-func (c *Client) BroadcastBundle(transactions []*solana.Transaction, opts ...grpc.CallOption) (*proto.SendBundleResponse, error) {
+func (c *Client) BroadcastBundle(transactions []types.Transaction, opts ...grpc.CallOption) (*proto.SendBundleResponse, error) {
 	packets, err := assemblePackets(transactions)
 	if err != nil {
 		return nil, err
@@ -246,9 +248,13 @@ func (c *Client) BroadcastBundle(transactions []*solana.Transaction, opts ...grp
 }
 
 // BroadcastBundleWithConfirmation sends a bundle of transactions on chain thru Jito BlockEngine and waits for its confirmation.
-func (c *Client) BroadcastBundleWithConfirmation(ctx context.Context, transactions []*solana.Transaction, opts ...grpc.CallOption) (*proto.SendBundleResponse, error) {
-	bundleSignatures := pkg.BatchExtractSigFromTx(transactions)
+func (c *Client) BroadcastBundleWithConfirmation(ctx context.Context, transactions []types.Transaction, opts ...grpc.CallOption) (*proto.SendBundleResponse, error) {
+	bloctoBundleSignatures := pkg.BatchExtractSigFromTx(transactions)
 
+	bundleSignatures := make([]solana.Signature, 0, len(bloctoBundleSignatures))
+	for _, sig := range bloctoBundleSignatures {
+		bundleSignatures = append(bundleSignatures, solana.MustSignatureFromBase58(base58.Encode(sig)))
+	}
 	resp, err := c.BroadcastBundle(transactions, opts...)
 	if err != nil {
 		return nil, err
@@ -402,7 +408,7 @@ func (c *Client) SimulateBundle(ctx context.Context, bundleParams SimulateBundle
 	return out, err
 }
 
-func (c *Client) AssembleBundle(transactions []*solana.Transaction) (*proto.Bundle, error) {
+func (c *Client) AssembleBundle(transactions []types.Transaction) (*proto.Bundle, error) {
 	packets, err := assemblePackets(transactions)
 	if err != nil {
 		return nil, err
@@ -427,7 +433,7 @@ func (c *Client) GenerateTipRandomAccountInstruction(tipAmount uint64, from sola
 }
 
 // assemblePackets is a function that converts a slice of transactions to a slice of protobuf packets.
-func assemblePackets(transactions []*solana.Transaction) ([]*proto.Packet, error) {
+func assemblePackets(transactions []types.Transaction) ([]*proto.Packet, error) {
 	packets := make([]*proto.Packet, 0, len(transactions))
 
 	for i, tx := range transactions {

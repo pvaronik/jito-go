@@ -3,9 +3,9 @@ package relayer_client
 import (
 	"github.com/gagliardetto/solana-go"
 	"github.com/joho/godotenv"
+	jito_go "github.com/pvaronik/jito-go"
+	"github.com/pvaronik/jito-go/proto"
 	"github.com/stretchr/testify/assert"
-	jito_go "github.com/weeaa/jito-go"
-	"github.com/weeaa/jito-go/proto"
 	"os"
 	"path/filepath"
 	"runtime"

@@ -1,13 +1,13 @@
 # Jito Go SDK
-[![GoDoc](https://pkg.go.dev/badge/github.com/weeaa/jito-go?status.svg)](https://pkg.go.dev/github.com/weeaa/jito-go?tab=doc)
-[![Go Report Card](https://goreportcard.com/badge/github.com/weeaa/jito-go)](https://goreportcard.com/report/github.com/weeaa/jito-go)
+[![GoDoc](https://pkg.go.dev/badge/github.com/pvaronik/jito-go?status.svg)](https://pkg.go.dev/github.com/pvaronik/jito-go?tab=doc)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pvaronik/jito-go)](https://goreportcard.com/report/github.com/pvaronik/jito-go)
 [![License](https://img.shields.io/badge/license-Apache_2.0-crimson)](https://opensource.org/license/apache-2-0)
 
 This library contains tooling to interact with **[Jito Labs](https://www.jito.wtf/)** MEV software. ⚠️ Work in progress. ⚠️
 
 PRs and contributions are welcome.
 
-![jitolabs](https://github.com/weeaa/jito-go/assets/108926252/5751416c-333b-412e-8f3f-f26b2839be98)
+![jitolabs](https://github.com/pvaronik/jito-go/assets/108926252/5751416c-333b-412e-8f3f-f26b2839be98)
 
 ## ❇️ Contents
 - [Features](#-features)
@@ -65,7 +65,7 @@ PRs and contributions are welcome.
 
 Go 1.21 or higher
 ```shell
-go get github.com/weeaa/jito-go@latest
+go get github.com/pvaronik/jito-go@latest
 ```
 
 If you want to run tests:
@@ -91,8 +91,8 @@ import (
   "github.com/gagliardetto/solana-go/programs/system"
   "github.com/gagliardetto/solana-go/rpc"
   "github.com/joho/godotenv"
-  "github.com/weeaa/jito-go"
-  "github.com/weeaa/jito-go/clients/searcher_client"
+  "github.com/pvaronik/jito-go"
+  "github.com/pvaronik/jito-go/clients/searcher_client"
   "log"
   "os"
   "time"
@@ -197,8 +197,8 @@ import (
   "context"
   "github.com/gagliardetto/solana-go/rpc"
   "github.com/joho/godotenv"
-  "github.com/weeaa/jito-go"
-  "github.com/weeaa/jito-go/clients/searcher_client"
+  "github.com/pvaronik/jito-go"
+  "github.com/pvaronik/jito-go/clients/searcher_client"
   "log"
   "os"
 )
@@ -269,8 +269,8 @@ package main
 import (
     "github.com/gagliardetto/solana-go"
     "github.com/gagliardetto/solana-go/rpc"
-    "github.com/weeaa/jito-go"
-    "github.com/weeaa/jito-go/clients/searcher_client"
+    "github.com/pvaronik/jito-go"
+    "github.com/pvaronik/jito-go/clients/searcher_client"
     "log"
     "os"
 )
@@ -321,8 +321,8 @@ package main
 
 import (
 	"context"
-	"github.com/weeaa/jito-go/clients/geyser_client"
-	"github.com/weeaa/jito-go/proto"
+	"github.com/pvaronik/jito-go/clients/geyser_client"
+	"github.com/pvaronik/jito-go/proto"
 	"log"
 )
 
@@ -362,4 +362,4 @@ If my work has been useful in building your for-profit services/infra/bots/etc, 
 
 ## 📃 License
 
-[Apache-2.0 License](https://github.com/weeaa/jito-go/blob/main/LICENSE).
+[Apache-2.0 License](https://github.com/pvaronik/jito-go/blob/main/LICENSE).

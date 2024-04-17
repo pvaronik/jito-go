@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/gagliardetto/solana-go"
 	"github.com/mr-tron/base58"
-	"github.com/weeaa/jito-go/proto"
+	"github.com/pvaronik/jito-go/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"sync"

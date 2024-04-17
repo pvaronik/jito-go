@@ -3,6 +3,7 @@ package pkg
 import (
 	"context"
 	"fmt"
+	"github.com/blocto/solana-go-sdk/types"
 	"github.com/gagliardetto/solana-go"
 	"github.com/gorilla/websocket"
 	"time"
@@ -13,8 +14,8 @@ func ExtractSigFromTx(tx *solana.Transaction) solana.Signature {
 	return tx.Signatures[0]
 }
 
-func BatchExtractSigFromTx(txns []*solana.Transaction) []solana.Signature {
-	sigs := make([]solana.Signature, 0, len(txns))
+func BatchExtractSigFromTx(txns []types.Transaction) []types.Signature {
+	sigs := make([]types.Signature, 0, len(txns))
 	for _, tx := range txns {
 		sigs = append(sigs, tx.Signatures[0])
 	}

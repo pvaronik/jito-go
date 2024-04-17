@@ -3,8 +3,8 @@ package geyser_client
 import (
 	"context"
 	"github.com/joho/godotenv"
+	"github.com/pvaronik/jito-go/proto"
 	"github.com/stretchr/testify/assert"
-	"github.com/weeaa/jito-go/proto"
 	"os"
 	"path/filepath"
 	"runtime"

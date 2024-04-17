@@ -1,14 +1,15 @@
 package pkg
 
 import (
+	"github.com/blocto/solana-go-sdk/types"
 	bin "github.com/gagliardetto/binary"
 	"github.com/gagliardetto/solana-go"
-	"github.com/weeaa/jito-go/proto"
+	"github.com/pvaronik/jito-go/proto"
 )
 
 // ConvertTransactionToProtobufPacket converts a solana-go Transaction to a proto.Packet.
-func ConvertTransactionToProtobufPacket(transaction *solana.Transaction) (proto.Packet, error) {
-	data, err := transaction.MarshalBinary()
+func ConvertTransactionToProtobufPacket(transaction types.Transaction) (proto.Packet, error) {
+	data, err := transaction.Serialize()
 	if err != nil {
 		return proto.Packet{}, err
 	}
@@ -26,7 +27,7 @@ func ConvertTransactionToProtobufPacket(transaction *solana.Transaction) (proto.
 }
 
 // ConvertBatchTransactionToProtobufPacket converts a slice of solana-go Transaction to a slice of proto.Packet.
-func ConvertBatchTransactionToProtobufPacket(transactions []*solana.Transaction) ([]*proto.Packet, error) {
+func ConvertBatchTransactionToProtobufPacket(transactions []types.Transaction) ([]*proto.Packet, error) {
 	packets := make([]*proto.Packet, 0, len(transactions))
 	for _, tx := range transactions {
 		packet, err := ConvertTransactionToProtobufPacket(tx)
